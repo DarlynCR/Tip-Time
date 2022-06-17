@@ -9,7 +9,7 @@ import java.text.NumberFormat
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
 
         val cost = binding.costOfServiceEditText.text.toString().toDoubleOrNull()
 
-        if(cost != null){
+        if (cost != null) {
 
-            val tipPercentage = when (binding.tipOptions.checkedRadioButtonId){
+            val tipPercentage = when (binding.tipOptions.checkedRadioButtonId) {
 
                 R.id.option_twenty_percent -> 0.20
                 R.id.option_eighteen_percent -> 0.18
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
             var tip = tipPercentage * cost
 
-            if(binding.roundUpSwitch.isChecked){
+            if (binding.roundUpSwitch.isChecked) {
                 tip = kotlin.math.ceil(tip)
             }
 
@@ -49,12 +49,10 @@ class MainActivity : AppCompatActivity() {
                 isVisible = true
                 text = getString(R.string.tip_amount, formattedTip)
             }
-        }else {
+        } else {
             binding.tipResult.text = ""
             Toast.makeText(this, "Enter the cost of the service.", Toast.LENGTH_LONG).show()
         }
-
-
 
 
     }
