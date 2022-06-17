@@ -3,6 +3,7 @@ package com.example.tiptime
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.example.tiptime.databinding.ActivityMainBinding
 import java.text.NumberFormat
 
@@ -15,6 +16,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.tipResult.isVisible = false
 
         binding.calculateButton.setOnClickListener { calculateTip() }
 
@@ -42,7 +45,10 @@ class MainActivity : AppCompatActivity() {
 
             val formattedTip = NumberFormat.getCurrencyInstance().format(tip)
 
-            binding.tipResult.text = getString(R.string.tip_amount, formattedTip)
+            binding.tipResult.apply {
+                isVisible = true
+                text = getString(R.string.tip_amount, formattedTip)
+            }
         }else {
             binding.tipResult.text = ""
             Toast.makeText(this, "Enter the cost of the service.", Toast.LENGTH_LONG).show()
